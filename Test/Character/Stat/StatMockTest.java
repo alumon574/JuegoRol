@@ -36,6 +36,7 @@ class StatMockTest {
     void InitialValue_DecreaseValue_EndValue() {
         stat.decrease();
         assertEquals(initialValue-1,stat.getValue());
+
     }
 
 }
