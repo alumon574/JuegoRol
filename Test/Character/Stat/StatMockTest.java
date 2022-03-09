@@ -22,18 +22,18 @@ class StatMockTest {
 
 
     @Test
-    void getValue() {
+    void InitialValue_getValue_CurrentValue() {
         assertEquals(initialValue, stat.getValue());
     }
 
     @Test
-    void increase() {
+    void InitialValue_IncreaseValue_EndValue() {
         stat.increase();
         assertEquals(initialValue+1,stat.getValue());
     }
 
     @Test
-    void decrease() {
+    void InitialValue_DecreaseValue_EndValue() {
         stat.decrease();
         assertEquals(initialValue-1,stat.getValue());
     }

@@ -19,8 +19,8 @@ public abstract class Stat {
         value--;
     }
 
-    //@Override
-    //public String toString() {
-
-    //}
+    @Override
+    public String toString() {
+        return "Value" + value;
+    }
 }
