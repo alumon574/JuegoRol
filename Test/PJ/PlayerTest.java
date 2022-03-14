@@ -80,6 +80,9 @@ class PlayerTest {
 
     @Test
     void isDead() {
+        boolean isDead;
+        isDead=personaje.currentHealth()<=0;
+        assertEquals(isDead,personaje.isDead());
     }
 
     @Test

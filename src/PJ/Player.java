@@ -77,8 +77,8 @@ public class Player implements IDamageable {
     @Override
     public boolean isDead() {
         if (currentHealth() <= 0)
-            return false;
-        return true;
+            return true;
+        return false;
     }
 
     @Override
