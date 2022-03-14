@@ -12,7 +12,8 @@ public abstract class Race {
     //Devuelve true si son la misma clase
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        if(obj == null) return false;
+        return getClass() == obj.getClass();
     }
 
 //Devuelve el nombre simple de la clase
