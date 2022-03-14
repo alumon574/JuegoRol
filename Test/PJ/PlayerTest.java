@@ -68,9 +68,4 @@ class PlayerTest {
         int health = (constitutionBase + raceModifier + jobModifer) * 25;
         assertEquals(health, personaje.health());
     }
-
-    @Test
-    void testToString() {
-        assertEquals("pep guardiola", personaje.getName());
-    }
 }
