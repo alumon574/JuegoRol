@@ -22,6 +22,7 @@ class PlayerTest {
     int strengthBase = 5;
     int constitutionBase = 5;
     int intelligenceBase = 5;
+    int damage;
 
     @BeforeEach
     void setUp() {
@@ -64,8 +65,28 @@ class PlayerTest {
     }
 
     @Test
-    void health() {
+    void maxHealth() {
         int health = (constitutionBase + raceModifier + jobModifer) * 25;
-        assertEquals(health, personaje.health());
+        assertEquals(health,personaje.maxHealth());
+    }
+
+    @Test
+    void currentHealth() {
+        damage=25;
+        personaje.receivesDamage(damage);
+      double dmgExpected= personaje.maxHealth()-damage;
+        assertEquals(dmgExpected,personaje.currentHealth());
+    }
+
+    @Test
+    void isDead() {
+    }
+
+    @Test
+    void receivesDamage() {
+    }
+
+    @Test
+    void heals() {
     }
 }
