@@ -1,10 +1,12 @@
 package PJ;
 
+import Food.FoodMock;
 import PJ.Job.Job;
 import PJ.Job.JobMock;
 import PJ.Race.Race;
 import PJ.Race.RaceMock;
 import PJ.Stat.*;
+import Potion.PotionMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,12 +25,16 @@ class PlayerTest {
     int constitutionBase = 5;
     int intelligenceBase = 5;
     int damage;
-    int healAmount;
+    FoodMock foodMock;
+    PotionMock potionMock;
 
     @BeforeEach
     void setUp() {
+        damage=25;
         raceMock = new RaceMock(raceModifier);
         jobMock = new JobMock(jobModifer);
+        foodMock=new FoodMock(5);
+        potionMock=new PotionMock(15);
         personaje = new Player(nombre, raceMock, jobMock, new Dexterity(dexterityBase), new Strength(strengthBase), new Constitution(constitutionBase), new Intelligence(intelligenceBase));
     }
 
@@ -68,13 +74,12 @@ class PlayerTest {
     @Test
     void maxHealth() {
         int health = (constitutionBase + raceModifier + jobModifer) * 25;
-        System.out.println(personaje.maxHealth());
+        System.out.println(health);
         assertEquals(health,personaje.maxHealth());
     }
 
     @Test
     void currentHealth() {
-        damage=25;
         personaje.receivesDamage(damage);
       double dmgExpected= personaje.maxHealth()-damage;
         assertEquals(dmgExpected,personaje.currentHealth());
@@ -89,15 +94,28 @@ class PlayerTest {
 
     @Test
     void receivesDamage() {
-        damage=25;
         personaje.receivesDamage(damage);
-       assertEquals(350,personaje.currentHealth());
+        assertEquals(350,personaje.currentHealth());
     }
 
     @Test
     void heals() {
-        damage=25;
-        personaje.heals(15);
-      //assertEquals(personaje.currentHealth(),personaje.heals(15));
+        personaje.receivesDamage(damage);
+        personaje.heals(damage);
+        assertEquals(personaje.currentHealth(),personaje.maxHealth());
+    }
+
+    @Test
+    void consumesFood() {
+        personaje.receivesDamage(damage);
+        personaje.consumes(foodMock);
+        assertEquals(355,personaje.currentHealth());
+    }
+
+    @Test
+    void consumesPotion() {
+        personaje.receivesDamage(damage);
+        personaje.consumes(potionMock);
+        assertEquals(365,personaje.currentHealth());
     }
 }

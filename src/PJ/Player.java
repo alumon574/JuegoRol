@@ -1,5 +1,6 @@
 package PJ;
 
+import Item.IConsumable;
 import PJ.Job.Job;
 import PJ.Race.Race;
 import PJ.Stat.*;
@@ -15,6 +16,14 @@ public class Player implements IDamageable {
     private Intelligence intelligence;
     private int damage;
 
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
     public String getName() {
         return name;
     }
@@ -26,6 +35,7 @@ public class Player implements IDamageable {
     public Race getRace() {
         return race;
     }
+
 
     public Player(String name, Race race, Job job, Dexterity dexterity, Strength strength, Constitution constitution, Intelligence intelligence) {
         this.name = name;
@@ -84,12 +94,18 @@ public class Player implements IDamageable {
     @Override
     public void receivesDamage(double amount) {
         damage += amount;
-        System.out.println(name + "Recieves " + amount + " points of damage. " + " Health: " + (maxHealth() - amount) + "/" + maxHealth());
+        System.out.println(name + " Recieves " + amount + " points of damage. " + " Health: " + (maxHealth() - amount) + "/" + maxHealth());
     }
 
     @Override
     public void heals(double amount) {
         damage -= amount;
-        System.out.println(name+"Heals "+amount+" health "+ "Health: " + (maxHealth()-damage) + "/" + maxHealth());
+        System.out.println(name + "Heals " + amount + " health " + "Health: " + (maxHealth() - damage) + "/" + maxHealth());
+    }
+
+    public void consumes(IConsumable consumable) {
+        System.out.println(this.getName() + " Consumes: " + consumable);
+        consumable.consumedBy(this);
     }
 }
+
