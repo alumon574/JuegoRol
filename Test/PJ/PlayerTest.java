@@ -23,6 +23,7 @@ class PlayerTest {
     int constitutionBase = 5;
     int intelligenceBase = 5;
     int damage;
+    int healAmount;
 
     @BeforeEach
     void setUp() {
@@ -67,6 +68,7 @@ class PlayerTest {
     @Test
     void maxHealth() {
         int health = (constitutionBase + raceModifier + jobModifer) * 25;
+        System.out.println(personaje.maxHealth());
         assertEquals(health,personaje.maxHealth());
     }
 
@@ -87,9 +89,15 @@ class PlayerTest {
 
     @Test
     void receivesDamage() {
+        damage=25;
+        personaje.receivesDamage(damage);
+       assertEquals(350,personaje.currentHealth());
     }
 
     @Test
     void heals() {
+        damage=25;
+        personaje.heals(15);
+      //assertEquals(personaje.currentHealth(),personaje.heals(15));
     }
 }

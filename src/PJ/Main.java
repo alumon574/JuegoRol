@@ -14,6 +14,7 @@ public class Main {
         Thief thief=new Thief();
         Player player=new Player("pep", human,thief,new Dexterity(5),new Strength(5),new Constitution(5),new Intelligence(5));
         System.out.println(player);
+        System.out.println(player.maxHealth());
     }
 
 
