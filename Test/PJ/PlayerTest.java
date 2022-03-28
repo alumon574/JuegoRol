@@ -1,6 +1,7 @@
 package PJ;
 
 import Food.FoodMock;
+import Item.IConsumable;
 import PJ.Job.Job;
 import PJ.Job.JobMock;
 import PJ.Race.Race;
@@ -54,66 +55,73 @@ class PlayerTest {
     }
 
     @Test
-    void velocity() {
+    void calculateVelocity() {
         int velocity = (dexterityBase + raceModifier + jobModifer) * 2;
         assertEquals(velocity, personaje.velocity());
     }
 
     @Test
-    void power() {
+    void calculatePower() {
         int power = (strengthBase + raceModifier + jobModifer) * 2;
         assertEquals(power, personaje.power());
     }
 
     @Test
-    void magic() {
+    void calculateMagic() {
         int magic = (intelligenceBase + raceModifier + jobModifer) * 2;
         assertEquals(magic, personaje.magic());
     }
 
     @Test
-    void maxHealth() {
+    void calculate_maxHealth() {
         int health = (constitutionBase + raceModifier + jobModifer) * 25;
         System.out.println(health);
         assertEquals(health,personaje.maxHealth());
     }
 
     @Test
-    void currentHealth() {
+    void calculate_CurrentHealth() {
         personaje.receivesDamage(damage);
       double dmgExpected= personaje.maxHealth()-damage;
         assertEquals(dmgExpected,personaje.currentHealth());
     }
 
     @Test
-    void isDead() {
+    void check_IsDead() {
         boolean isDead;
         isDead=personaje.currentHealth()<=0;
         assertEquals(isDead,personaje.isDead());
     }
 
     @Test
-    void receivesDamage() {
+    void consumes_callsConsumedBy(){
+        ConsumableMock consumableMock= new ConsumableMock();
+        personaje.consumes(consumableMock);
+        assertTrue(consumableMock.isConsumedByCalled());
+    }
+
+    @Test
+    void calculate_DamageRecieved() {
         personaje.receivesDamage(damage);
         assertEquals(350,personaje.currentHealth());
     }
 
     @Test
-    void heals() {
+    void recievedamage_currentHealth_checkCurrentHealth() {
         personaje.receivesDamage(damage);
         personaje.heals(damage);
         assertEquals(personaje.currentHealth(),personaje.maxHealth());
     }
 
     @Test
-    void consumesFood() {
+    void recieveDamage_eatFood_checkCurrentHealth() {
         personaje.receivesDamage(damage);
         personaje.consumes(foodMock);
         assertEquals(355,personaje.currentHealth());
     }
 
     @Test
-    void consumesPotion() {
+    void recieveDamage_drinkPotion_checkCurrentHealth() {
         personaje.receivesDamage(damage);
         personaje.consumes(potionMock);
         assertEquals(365,personaje.currentHealth());

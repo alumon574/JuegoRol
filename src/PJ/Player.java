@@ -16,6 +16,7 @@ public class Player implements IDamageable {
     private Intelligence intelligence;
     private int damage;
 
+
     public int getDamage() {
         return damage;
     }

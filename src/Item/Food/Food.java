@@ -1,9 +1,10 @@
 package Item.Food;
 
 import Item.IConsumable;
+import Item.IPickable;
 import PJ.Player;
 
-public abstract class Food implements IConsumable {
+public abstract class Food implements IConsumable, IPickable {
     private int power;
 
     public Food(int power){
@@ -13,5 +14,10 @@ public abstract class Food implements IConsumable {
     @Override
     public void consumedBy(Player player) {
         player.heals(power);
+    }
+
+    @Override
+    public double Weight() {
+        return 0;
     }
 }

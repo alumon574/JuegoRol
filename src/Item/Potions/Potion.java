@@ -1,9 +1,10 @@
 package Item.Potions;
 
 import Item.IConsumable;
+import Item.IPickable;
 import PJ.Player;
 
-public abstract class Potion implements IConsumable {
+public abstract class Potion implements IConsumable, IPickable {
 
     private int power;
 
@@ -14,5 +15,10 @@ public abstract class Potion implements IConsumable {
     @Override
     public void consumedBy(Player player) {
     player.heals(power);
+    }
+
+    @Override
+    public double Weight() {
+        return 0;
     }
 }
